@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пользователи</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+  <div>
+    <h1>Пользователи</h1>
+    <p>Учет читателей, сотрудников и ролей</p>
+  </div>
+  <div class="role-box">
+    <span>Пользователь: <b id="currentUserText">не выполнен вход</b></span>
+    <span>Доступ: <b id="currentRoleText">Гость</b></span>
+    <button id="logoutBtn" class="secondary">Выйти</button>
+  </div>
+</header>
+<nav class="nav">
+  <a href="index.html">Вход</a>
+  <a class="active" data-role="admin,librarian" href="users.html">Пользователи</a>
+  <a data-role="admin,librarian,reader" href="books.html">Книги</a>
+  <a data-role="admin,librarian,reader" href="profile.html">Профиль</a>
+  <a data-role="admin" href="logs.html">Журнал</a>
+</nav>
+<main class="container">
+  <section class="card">
+    <h2>Поиск пользователей</h2>
+    <div class="form-grid">
+      <input id="searchInput" placeholder="Имя, email или роль">
+      <button id="searchBtn">Найти</button>
+      <button id="reloadBtn" class="secondary">Обновить</button>
+    </div>
+    <div id="message"></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Возраст</th>
+            <th>Роль</th>
+            <th>Действие</th>
+          </tr>
+        </thead>
+        <tbody id="usersTable"></tbody>
+      </table>
+    </div>
+  </section>
+  <section class="card" data-role="admin">
+    <h2 id="userFormTitle">Новая учетная запись</h2>
+    <form id="userForm" class="form-grid">
+      <input name="name" placeholder="ФИО" required>
+      <input name="email" placeholder="Email" required>
+      <input name="age" placeholder="Возраст" type="number">
+      <select name="role">
+        <option value="reader">Читатель</option>
+        <option value="librarian">Библиотекарь</option>
+        <option value="admin">Администратор</option>
+      </select>
+      <button id="userSubmitBtn">Создать</button>
+      <button id="userCancelBtn" class="secondary hidden" type="button">Отмена</button>
+    </form>
+  </section>
+</main>
+<script src="js/auth.js"></script><script src="js/api.js"></script><script src="js/users.js"></script>
+</body>
+</html>
