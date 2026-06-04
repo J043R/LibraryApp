@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Книги</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+  <div>
+    <h1>Книги</h1>
+    <p>Фонд библиотеки, выдача и возврат экземпляров</p>
+  </div>
+  <div class="role-box">
+    <span>Пользователь: <b id="currentUserText">не выполнен вход</b></span>
+    <span>Доступ: <b id="currentRoleText">Гость</b></span>
+    <button id="logoutBtn" class="secondary">Выйти</button>
+  </div>
+</header>
+<nav class="nav">
+  <a href="index.html">Вход</a>
+  <a data-role="admin,librarian" href="users.html">Пользователи</a>
+  <a class="active" data-role="admin,librarian,reader" href="books.html">Книги</a>
+  <a data-role="admin,librarian,reader" href="profile.html">Профиль</a>
+  <a data-role="admin" href="logs.html">Журнал</a>
+</nav>
+<main class="container">
+  <section class="card">
+    <h2>Поиск в фонде</h2>
+    <div class="form-grid">
+      <input id="bookSearch" placeholder="Название или автор">
+      <button id="bookSearchBtn">Найти</button>
+      <button id="bookReloadBtn" class="secondary">Обновить</button>
+    </div>
+    <div id="message"></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>Год</th>
+            <th>Статус</th>
+            <th>Читатель</th>
+            <th>Вернуть до</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody id="booksTable"></tbody>
+      </table>
+    </div>
+  </section>
+  <section class="card" data-role="admin,librarian">
+    <h2>Новая книга</h2>
+    <form id="bookForm" class="form-grid">
+      <input name="title" placeholder="Название" required>
+      <input name="author" placeholder="Автор" required>
+      <input name="year" type="number" placeholder="Год">
+      <button>Добавить в фонд</button>
+    </form>
+  </section>
+</main>
+<script src="js/auth.js"></script><script src="js/api.js"></script><script src="js/books.js"></script>
+</body>
+</html>
