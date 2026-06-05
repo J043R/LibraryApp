@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Журнал операций</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+  <div>
+    <h1>Журнал операций</h1>
+    <p>События системы и действия с фондом</p>
+  </div>
+  <div class="role-box">
+    <span>Пользователь: <b id="currentUserText">не выполнен вход</b></span>
+    <span>Доступ: <b id="currentRoleText">Гость</b></span>
+    <button id="logoutBtn" class="secondary">Выйти</button>
+  </div>
+</header>
+<nav class="nav">
+  <a href="index.html">Вход</a>
+  <a data-role="admin,librarian" href="users.html">Пользователи</a>
+  <a data-role="admin,librarian,reader" href="books.html">Книги</a>
+  <a data-role="admin,librarian,reader" href="profile.html">Профиль</a>
+  <a class="active" data-role="admin" href="logs.html">Журнал</a>
+</nav>
+<main class="container">
+  <section class="card">
+    <h2>Последние события</h2>
+    <div class="form-grid">
+      <button id="loadLogsBtn">Обновить журнал</button>
+    </div>
+    <div id="logsResult" class="profile-empty">Журнал еще не загружен</div>
+  </section>
+</main>
+<script src="js/auth.js"></script><script src="js/api.js"></script><script src="js/logs.js"></script>
+</body>
+</html>
