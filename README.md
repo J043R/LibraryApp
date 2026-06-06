@@ -98,8 +98,6 @@ frontend/
   js/         Fetch API, роли и LocalStorage
 ```
 
-Подробная привязка реализации к критериям находится в `CRITERIA.md`.
-
 ## Распределение работы
 
 - **Максим Ладыгин, frontend и SQLite**: HTML/CSS, страницы, Fetch API,
