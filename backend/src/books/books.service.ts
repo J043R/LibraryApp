@@ -19,13 +19,12 @@ export class BooksService {
   constructor(private readonly database: DatabaseService) {}
 
   findAll(search = '') {
-    const query = `%${search.trim().toLowerCase()}%`;
+    const query = `%${search.trim().toLocaleLowerCase('ru-RU')}%`;
     return this.database
       .all<BookRow>(
         `${this.bookSelect()}
-         WHERE lower(b.title) LIKE ? OR lower(b.author) LIKE ? OR CAST(b.year AS TEXT) LIKE ?
+         WHERE normalize_text(b.title) LIKE ? OR normalize_text(b.author) LIKE ?
          ORDER BY b.id`,
-        query,
         query,
         query
       )
