@@ -23,6 +23,9 @@ export class DatabaseService implements OnModuleDestroy {
     mkdirSync(dirname(databasePath), { recursive: true });
     this.database = new DatabaseSync(databasePath);
     this.database.exec('PRAGMA foreign_keys = ON');
+    this.database.function('normalize_text', value =>
+      String(value ?? '').toLocaleLowerCase('ru-RU')
+    );
     this.createSchema();
     this.seed();
   }
