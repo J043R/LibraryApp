@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import { publicUser } from '../common/mappers';
 import { TokenService } from '../security/token.service';
 import { UsersService } from '../users/users.service';
+import { RegisterDto } from './dto/register.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,5 +22,10 @@ export class AuthService {
       ...publicUser(user),
       token: this.tokenService.sign({ id: user.id, role: user.role })
     };
+  }
+
+  async register(dto: RegisterDto) {
+    await this.usersService.registerReader(dto);
+    return this.login(dto.email, dto.password);
   }
 }

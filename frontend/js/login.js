@@ -1,22 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('loginForm');
-  const message = document.getElementById('loginMessage');
-  if (!form) return;
+  const loginForm = document.getElementById('loginForm');
+  const loginMessage = document.getElementById('loginMessage');
 
-  form.addEventListener('submit', async event => {
-    event.preventDefault();
-    const payload = Object.fromEntries(new FormData(form).entries());
+  if (loginForm) {
+    loginForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const payload = Object.fromEntries(new FormData(loginForm).entries());
 
-    try {
-      const user = await apiRequest('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify(payload)
-      });
+      try {
+        const user = await apiRequest('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
 
-      saveSession(user);
-      location.href = '/books.html';
-    } catch (error) {
-      message.innerHTML = `<div class="alert">${error.message}</div>`;
-    }
-  });
+        saveSession(user);
+        location.href = '/books.html';
+      } catch (error) {
+        loginMessage.innerHTML = `<div class="alert">${error.message}</div>`;
+      }
+    });
+  }
+
+  const registerForm = document.getElementById('registerForm');
+  const registerMessage = document.getElementById('registerMessage');
+
+  if (registerForm) {
+    registerForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const payload = Object.fromEntries(new FormData(registerForm).entries());
+      if (!payload.age) delete payload.age;
+
+      try {
+        const user = await apiRequest('/auth/register', {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+
+        saveSession(user);
+        location.href = '/books.html';
+      } catch (error) {
+        registerMessage.innerHTML = `<div class="alert">${error.message}</div>`;
+      }
+    });
+  }
 });

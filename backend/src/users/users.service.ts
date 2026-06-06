@@ -5,6 +5,14 @@ import { DatabaseService, UserRecord } from '../database/database.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
+type NewUserData = {
+  name: string;
+  email: string;
+  age?: number;
+  password?: string;
+  role: string;
+};
+
 @Injectable()
 export class UsersService {
   constructor(private readonly database: DatabaseService) {}
@@ -44,6 +52,20 @@ export class UsersService {
   }
 
   async create(dto: CreateUserDto) {
+    return this.createUser({
+      ...dto,
+      role: dto.role || 'reader'
+    }, 'admin');
+  }
+
+  async registerReader(dto: { name: string; email: string; age?: number; password: string }) {
+    return this.createUser({
+      ...dto,
+      role: 'reader'
+    }, 'guest');
+  }
+
+  private async createUser(dto: NewUserData, actorRole: string) {
     if (this.findPrivateByEmail(dto.email)) {
       throw new ConflictException('Пользователь с таким email уже существует');
     }
@@ -57,11 +79,11 @@ export class UsersService {
       dto.name,
       dto.email,
       dto.age ?? null,
-      dto.role || 'reader',
+      dto.role,
       passwordHash
     );
     const user = this.findPrivateById(id);
-    this.database.writeLog('Создан пользователь', 'admin', `${dto.email} / ${dto.role || 'reader'}`);
+    this.database.writeLog('Создан пользователь', actorRole, `${dto.email} / ${dto.role}`);
     return publicUser(user);
   }
 
