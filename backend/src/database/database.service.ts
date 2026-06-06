@@ -66,7 +66,7 @@ export class DatabaseService implements OnModuleDestroy {
     const row = this.get<{ next_id: number }>(
       `SELECT COALESCE(MAX(CAST(id AS INTEGER)), 0) + 1 AS next_id FROM ${table}`
     );
-    return row?.next_id || 1;
+    return Math.trunc(Number(row?.next_id || 1));
   }
 
   onModuleDestroy() {
