@@ -12,7 +12,7 @@ export class LogsService {
 
   findAll() {
     return this.database
-      .all('SELECT * FROM logs ORDER BY id DESC')
+      .all('SELECT * FROM logs ORDER BY datetime(created_at) DESC, rowid DESC')
       .map(logDto);
   }
 }
