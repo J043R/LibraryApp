@@ -50,6 +50,19 @@
       <p class="muted">Администратор: bodrova@example.com. Библиотекарь: ladygin@example.com. Читатель: ivan@example.com.</p>
     </section>
 
+    <section class="card">
+      <h2>Регистрация читателя</h2>
+      <form id="registerForm" class="form-grid register-form">
+        <input name="name" type="text" minlength="2" maxlength="120" placeholder="Имя и фамилия" required>
+        <input name="email" type="email" placeholder="Электронная почта" required>
+        <input name="age" type="number" min="1" max="120" placeholder="Возраст (необязательно)">
+        <input name="password" type="password" minlength="6" maxlength="80" placeholder="Пароль, не менее 6 символов" required>
+        <button>Зарегистрироваться</button>
+      </form>
+      <div id="registerMessage"></div>
+      <p class="muted">Новая учетная запись автоматически получает категорию «Читатель».</p>
+    </section>
+
     <section class="card" data-role="admin,librarian,reader">
       <h2>Состояние сервера</h2>
       <button id="checkApiBtn">Проверить API</button>

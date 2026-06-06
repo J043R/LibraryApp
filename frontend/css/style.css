@@ -137,6 +137,14 @@ body {
   margin-bottom: 14px;
 }
 
+.register-form {
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+}
+
+.register-form button {
+  grid-column: 1 / -1;
+}
+
 select,
 input,
 button {
@@ -340,4 +348,5 @@ pre {
   .container { margin: 18px auto; padding: 0 12px; }
   .profile-card { grid-template-columns: 1fr; }
   .profile-title-row { flex-direction: column; }
+  .register-form { grid-template-columns: 1fr; }
 }
