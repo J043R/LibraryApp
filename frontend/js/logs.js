@@ -43,11 +43,20 @@ function renderLogs(logs) {
 
 async function loadLogs() {
   const result = document.getElementById('logsResult');
+  const button = document.getElementById('loadLogsBtn');
+  const updatedAt = document.getElementById('logsUpdatedAt');
+  button.disabled = true;
+  button.textContent = 'Обновление...';
+
   try {
-    renderLogs(await apiRequest('/logs'));
+    renderLogs(await apiRequest(`/logs?time=${Date.now()}`));
+    updatedAt.textContent = `Обновлено: ${new Date().toLocaleTimeString('ru-RU')}`;
   } catch (error) {
     result.className = 'profile-empty profile-error';
     result.textContent = error.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Обновить журнал';
   }
 }
 
